@@ -27,7 +27,7 @@ app.post("/auth/login", (req: Request, res: Response) => {
 
   const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "15m" });
 
-  res.json({ token, token_type: "Bearer" });
+  res.json({ token });
 });
 
 // middleware para verificar JWT
@@ -55,7 +55,7 @@ function authenticateJwt(
 
 // endpoint protegido
 app.get(
-  "/api/secret-jwt",
+  "/api/self",
   authenticateJwt,
   (req: Request & { user?: JwtPayloadCustom }, res: Response) => {
     res.json({
